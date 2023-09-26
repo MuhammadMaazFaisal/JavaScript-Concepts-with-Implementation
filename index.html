@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
+      integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      // Closures
+      function outerFunction() {
+        let outerVar = "I'm Maaz";
+
+        function Age() {
+          console.log(outerVar + " and I'm 20 years old");
+        }
+
+        function Qualification() {
+          console.log(outerVar + " and I'm a student of BSCS");
+        }
+
+        return {
+          inner1: Age,
+          inner2: Qualification,
+        };
+      }
+
+      // Spread Operators
+      function sum(a, b, c) {
+        return a + b + c;
+      }
+
+      $(document).ready(function () {
+        // Closures
+        const closure = outerFunction();
+        closure.inner1(); // This will log "I am from outerFunction - Inner Function 1"
+        closure.inner2(); // This will log "I am from outerFunction - Inner Function 2"
+
+        // Spread Operators
+
+        //   - Expanding an array:
+        const arr0 = [1, 2, 3];
+        const expandedArr = [...arr0]; // Creates a new array with the same elements
+
+        //   - Concatenating arrays:
+        const arr1 = [1, 2];
+        const arr2 = [3, 4];
+        const combinedArr = [...arr1, ...arr2]; // Results in [1, 2, 3, 4]
+
+        //   - Copying arrays or objects:
+        const originalArray = [1, 2, 3];
+        const copyArray = [...originalArray];
+
+        const originalObject = { a: 1, b: 2 };
+        const copyObject = { ...originalObject };
+
+        //   - Function arguments:
+        const numbers = [1, 2, 3];
+        const result = sum(...numbers); // Equivalent to sum(1, 2, 3)
+
+        //   - Creating a new array or object:
+        const arr = [1, 2];
+        const newArr = [...arr, 3]; // Creates a new array [1, 2, 3]
+
+        const obj = { a: 1, b: 2 };
+        const newObj = { ...obj, c: 3 }; // Creates a new object { a: 1, b: 2, c: 3 }
+
+        //   - Merging objects:
+        const obj1 = { a: 1, b: 2 };
+        const obj2 = { b: 3, c: 4 };
+        const mergedObj = { ...obj1, ...obj2 }; // Merges both objects, with obj2 overwriting obj1 for 'b'
+
+        //   Shallow Copy:
+        //      Imagine you have a box of LEGO blocks, and you want to make a copy of the box. When you create a shallow copy, you create another box, but instead of filling it with new LEGO blocks, you put the same LEGO blocks from the original box into the new one. So, both boxes contain the same LEGO blocks. If you change a block in one box, it also changes in the other because they share the same blocks.
+
+        //   Deep Copy:
+        //      Now, think of making a deep copy like creating a new box and filling it with brand new LEGO blocks that look exactly like the ones in the original box. These new blocks are not connected to the ones in the original box. So, if you change a block in one box, it doesn't affect the other because they have completely separate LEGO blocks.
+
+        //  Arrow Functions
+
+        //      Traditional function expression
+        const add = function (a, b) {
+          return a + b;
+        };
+
+        //      Arrow function equivalent
+        const addArrow = (a, b) => {
+          return a + b;
+        };
+
+        //       Using the shorter form for a single expression
+        const addShort = (a, b) => a + b;
+
+        console.log(add(2, 3)); // 5
+        console.log(addArrow(2, 3)); // 5
+        console.log(addShort(2, 3)); // 5
+
+        const greet = () => {
+          return "Hello, world!";
+        };
+
+        //      Shorter form for a single expression
+        const greetShort = () => "Hello, world!";
+
+        console.log(greet()); // 'Hello, world!'
+        console.log(greetShort()); // 'Hello, world!'
+
+
+        //      Capturing "this" Value
+        const person = {
+          firstName: "John",
+          lastName: "Doe",
+          fullName: function () {
+            return `Hi, ${this.firstName} ${this.lastName}`;
+          },
+          greet: () => {
+            // In this case, 'this' refers to the outer context, not 'person'
+            return `Hello, ${this.firstName} ${this.lastName}`;
+          },
+        };
+
+        console.log(person.fullName()); // 'John Doe'
+        console.log(person.greet()); // 'Hello, undefined undefined'
+      });
+    </script>
+  </body>
+</html>
