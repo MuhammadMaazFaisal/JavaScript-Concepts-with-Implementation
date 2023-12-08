@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 export default function Navbar(props) {
+  const [search, setSearch] = useState("Good");
+  
+  const handleSearch = (e) => {
+    if (search === "Good Morning") {
+      setSearch("Good Afternoon");
+    } else if (search === "Good Afternoon") {
+      setSearch("Good Evening");
+    }else{
+      setSearch("Good Morning");
+    }
+
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -75,8 +88,10 @@ export default function Navbar(props) {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
-              <button className="btn btn-outline-success" type="submit">
+              <button className="btn btn-outline-success" type="button" onClick={handleSearch}>
                 Search
               </button>
             </form>
